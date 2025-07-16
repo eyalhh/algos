@@ -1,6 +1,8 @@
 # imports
 from collections import deque
 from enum import Enum
+from generic_algo import GenericAlgo
+from typing import Optional
 
 # color class
 class BFSColor(Enum):
@@ -9,7 +11,7 @@ class BFSColor(Enum):
     BLACK = 2
 
 # bfs class
-class BfsAlgo:
+class BfsAlgo(GenericAlgo):
 
     # NOTE: this implementation uses an adjacency matrix , which is not as efficient as adjacency list
     def __init__(self, graph: list[list[int]], starting_node: int):
@@ -18,11 +20,11 @@ class BfsAlgo:
         assert starting_node >= 0 and starting_node < self.length, 'index of starting node must be within bounds'
         self.start = starting_node
 
-    def run(self):
+    def run(self) -> tuple[list[float], list[int | None]]:
 
         bfs_queue = deque()
         d = [float('inf')] * self.length
-        pi = [None] * self.length
+        pi: list[int | None] = [None] * self.length # type checker was giving some problems 
         color = [BFSColor.WHITE] * self.length
 
         d[self.start] = 0
@@ -38,11 +40,11 @@ class BfsAlgo:
                         d[vertex] = d[u] + 1
                         pi[vertex] = u
                         bfs_queue.append(vertex)
-            color[u] = BFSColor.BLACK
-
             
-        return d, pi
-
+        return (d, pi)
+    
+    def test(self):
+        pass
 
 
 bfs = BfsAlgo([[0, 1, 1], [1, 0, 1], [1, 1, 0]], 0)
