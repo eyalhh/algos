@@ -11,6 +11,7 @@ class BFSColor(Enum):
 # bfs class
 class BfsAlgo:
 
+    # NOTE: this implementation uses an adjacency matrix , which is not as efficient as adjacency list
     def __init__(self, graph: list[list[int]], starting_node: int):
         self.graph = graph
         self.length = len(graph)
